@@ -44,19 +44,21 @@ posts = [
 ]
 
 
-def main(request):
+def index(request):
     template = 'index.html'
-    # context = {'ice_cream': ice_cream_catalog[pk]}
-    return render(request, template)
+    context = {'index': posts}
+    return render(request, template, context)
 
 
 def post_detail(request, id):
     template = 'blog/detail.html'
-    # context = {'ice_cream': ice_cream_catalog[pk]}
-    return render(request, template)
+    context = {}
+    context['posts'] = posts[id]
+    return render(request, template, context)
 
 
-def category_posts(request):
+def category_posts(request, category_slug):
     template = 'blog/category.html'
-    # context = {'ice_cream': ice_cream_catalog[pk]}
-    return render(request, template)
+    context = {}
+    context['category'] = posts[category_slug]
+    return render(request, template, context)
