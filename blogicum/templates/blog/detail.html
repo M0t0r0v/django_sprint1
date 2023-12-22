@@ -12,11 +12,11 @@
         Дата: {{ posts.date }}
       </li>
       <li>
-        Категория: <a href="not-my-day">{{ posts.category }}</a>
+        Категория: <a href="{% url 'blog:category_posts' posts.category %}">{{ posts.category }}</a>
       </li>
       </ul>         
       <p>
-      {{ posts.category }}
+      {{ posts.text|linebreaks }}
     </p>          
   </article>                
 {% endblock %}
