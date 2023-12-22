@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 
 posts = [
     {
@@ -46,14 +47,16 @@ posts = [
 
 def index(request):
     template = 'blog/index.html'
-    context = {'index': posts}
+    context = {'index': posts[::-1]}
     return render(request, template, context)
 
 
 def post_detail(request, id):
     template = 'blog/detail.html'
-    context = {}
-    context['posts'] = posts[id]
+    if not posts[id]:
+        raise Http404('Нет информации')
+    else:
+        context = {'post': posts[id]}
     return render(request, template, context)
 
 
