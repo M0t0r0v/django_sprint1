@@ -152,3 +152,7 @@ media/
 build_tests/
 yap_testing
 html/img/img/
+
+#CSS
+*.css
+static_dev/css
