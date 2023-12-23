@@ -1,7 +1,8 @@
-from django.shortcuts import render
 from django.http import Http404
+from django.shortcuts import render
 
-posts = [
+
+posts: list[dict] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -46,21 +47,14 @@ posts = [
 
 
 def index(request):
-    template = 'blog/index.html'
-    context = {'index': posts[::-1]}
-    return render(request, template, context)
+    return render(request, 'blog/index.html', {'index': reversed(posts)})
 
 
-def post_detail(request, id):
-    template = 'blog/detail.html'
-    if not posts[id]:
+def post_detail(request, post_id: int):
+    if post_id in posts:
         raise Http404('Нет информации')
-    else:
-        context = {'post': posts[id]}
-    return render(request, template, context)
+    return render(request, 'blog/detail.html', {'post': posts[post_id]})
 
 
-def category_posts(request, category_slug):
-    template = 'blog/category.html'
-    context = {'category': category_slug}
-    return render(request, template, context)
+def category_posts(request, category_slug: str):
+    return render(request, 'blog/category.html', {'category': category_slug})

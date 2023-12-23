@@ -20,9 +20,9 @@
     </ul>          
     <!-- Первые 10 слов -->
     <p>
-    {{ main.text|truncatewords:10 }}
+    {{ main.text|truncatewords:10|linebreaksbr }}
     </p>
-    <a href="{% url 'blog:post_detail' main.id %}"> Читать полный текст</a>
+    <a href="{% url 'blog:post_detail' main.id %}">Читать полный текст</a>
     </article>
   {% endfor %}      
 {% endblock %}
