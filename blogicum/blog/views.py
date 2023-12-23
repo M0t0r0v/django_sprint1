@@ -46,12 +46,17 @@ posts: list[dict] = [
 ]
 
 
+post_dict = {}
+for elements in posts:
+    post_dict.update({elements['id']: elements})
+
+
 def index(request):
     return render(request, 'blog/index.html', {'index': reversed(posts)})
 
 
 def post_detail(request, post_id: int):
-    if post_id in posts:
+    if not (post_id in post_dict):
         raise Http404('Нет информации')
     return render(request, 'blog/detail.html', {'post': posts[post_id]})
 
