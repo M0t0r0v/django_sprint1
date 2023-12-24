@@ -48,9 +48,9 @@ posts: list[dict[str, Union[str, int]]] = [
 ]
 
 
-post_by_id: dict[int, Union[str, int]] = {}
+posts_by_id: dict[int, dict[str, Union[str, int]]] = {}
 for elements in posts:
-    post_by_id.update({elements['id']: elements})
+    posts_by_id.update({elements['id']: elements})
 
 
 def index(request):
@@ -58,7 +58,7 @@ def index(request):
 
 
 def post_detail(request, post_id: int):
-    if not (post_id in post_by_id):
+    if not (post_id in posts_by_id):
         raise Http404('Нет информации')
     return render(request, 'blog/detail.html', {'post': posts[post_id]})
 
