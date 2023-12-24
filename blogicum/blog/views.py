@@ -1,9 +1,10 @@
-from django.http import Http404
-from django.shortcuts import render
 from typing import Union
 
+from django.http import Http404
+from django.shortcuts import render
 
-posts: list[dict[Union[str, int]]] = [
+
+posts: list[dict[str, Union[str, int]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -47,9 +48,9 @@ posts: list[dict[Union[str, int]]] = [
 ]
 
 
-post_dict: dict = {}
+post_by_id: dict[int, Union[str, int]] = {}
 for elements in posts:
-    post_dict.update({elements['id']: elements})
+    post_by_id.update({elements['id']: elements})
 
 
 def index(request):
@@ -57,7 +58,7 @@ def index(request):
 
 
 def post_detail(request, post_id: int):
-    if not (post_id in post_dict):
+    if not (post_id in post_by_id):
         raise Http404('Нет информации')
     return render(request, 'blog/detail.html', {'post': posts[post_id]})
 
