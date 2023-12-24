@@ -1,8 +1,9 @@
 from django.http import Http404
 from django.shortcuts import render
+from typing import Union
 
 
-posts: list[dict] = [
+posts: list[dict[Union[str, int]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -46,9 +47,12 @@ posts: list[dict] = [
 ]
 
 
-post_dict = {}
+post_dict: dict = {}
 for elements in posts:
     post_dict.update({elements['id']: elements})
+
+
+print(type(posts[0]['text']))
 
 
 def index(request):
