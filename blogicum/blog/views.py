@@ -52,9 +52,6 @@ for elements in posts:
     post_dict.update({elements['id']: elements})
 
 
-print(type(posts[0]['text']))
-
-
 def index(request):
     return render(request, 'blog/index.html', {'index': reversed(posts)})
 
